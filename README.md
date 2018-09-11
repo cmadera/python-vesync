@@ -6,10 +6,17 @@ This library allows you to get a list of devices and turn them on or off
 ## Usage
 ```python
 from vesync.api import VesyncApi
+import json
+
 api = VesyncApi("USERNAME","PASSWORD")
-print(api.get_devices())
-api.turn_on("DEVICE_ID")
-api.turn_off("DEVICE_ID")
+devices = api.get_devices()
+for x in devices:
+        device = eval(json.dumps(x))
+        print(device["deviceName"] + "=" + device["cid"] + "=" + device["deviceStatus"])
+
+api.turn_on("cid")
+api.turn_off("cid")
+
 ```
 
 ## Contributions
